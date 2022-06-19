@@ -2,12 +2,17 @@ from django.db import models
 
 
 class News(models.Model):
-    title = models.CharField(max_length=150)
-    content = models.TextField(blank=True) #blank=True - обозначает поле необязательное к заполнению
-    created_at = models.DateTimeField(auto_now_add=True) # auto_now_add=True - обозначает, что дата и время будут создаваться автоматически и при редактировании не изменяться (не обновляться)
-    updated_at = models.DateTimeField(auto_now=True) # auto_now=True при редактировании (обновлении) новости будет указано время ее редактирования
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/') # сохранение по дате при загрузке %Y/%m/%d/
-    is_puplished = models.BooleanField(default=True)  # default=True - новость по умолчанию публикуется
+    title = models.CharField(max_length=150, verbose_name = 'Наименование')
+    content = models.TextField(blank=True, verbose_name = 'Контент') #blank=True - обозначает поле необязательное к заполнению
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name = 'Дата публикации') # auto_now_add=True - обозначает, что дата и время будут создаваться автоматически и при редактировании не изменяться (не обновляться)
+    updated_at = models.DateTimeField(auto_now=True, verbose_name = 'Обновлено') # auto_now=True при редактировании (обновлении) новости будет указано время ее редактирования
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name = 'Фото') # сохранение по дате при загрузке %Y/%m/%d/
+    is_puplished = models.BooleanField(default=True, verbose_name = 'Опубликовано')  # default=True - новость по умолчанию публикуется
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
+        ordering = ['created_at']
