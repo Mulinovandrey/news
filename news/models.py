@@ -6,7 +6,7 @@ class News(models.Model):
     content = models.TextField(blank=True, verbose_name = 'Контент') #blank=True - обозначает поле необязательное к заполнению
     created_at = models.DateTimeField(auto_now_add=True, verbose_name = 'Дата публикации') # auto_now_add=True - обозначает, что дата и время будут создаваться автоматически и при редактировании не изменяться (не обновляться)
     updated_at = models.DateTimeField(auto_now=True, verbose_name = 'Обновлено') # auto_now=True при редактировании (обновлении) новости будет указано время ее редактирования
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name = 'Фото') # сохранение по дате при загрузке %Y/%m/%d/
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name = 'Фото', blank=True) # сохранение по дате при загрузке %Y/%m/%d/
     is_puplished = models.BooleanField(default=True, verbose_name = 'Опубликовано')  # default=True - новость по умолчанию публикуется
 
     def __str__(self):
